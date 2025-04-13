@@ -32,6 +32,9 @@ public class MoneyTransferService {
         // Get account references
         final Account from = accountRepository.findById(fromId);
         final Account to = accountRepository.findById(toId);
+        if (from == null || to == null) {
+            throw new IllegalArgumentException("Account doesn't exist");
+        }
         // Lock both accounts for consistency
         lockManager.lockBoth(from, to);
         boolean success = false;
