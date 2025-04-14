@@ -23,7 +23,7 @@ public class InMemoryUrlRepository implements UrlRepository {
 
     @Override
     public void save(UrlMapping urlMapping) {
-        this.longToShortMappings.putIfAbsent(urlMapping.getLongUrl(), urlMapping.getShortCode());
-        this.shortToLongMappings.putIfAbsent(urlMapping.getShortCode(), urlMapping.getLongUrl());
+        this.longToShortMappings.put(urlMapping.getLongUrl(), urlMapping.getShortCode());
+        this.shortToLongMappings.put(urlMapping.getShortCode(), urlMapping.getLongUrl());
     }
 }
