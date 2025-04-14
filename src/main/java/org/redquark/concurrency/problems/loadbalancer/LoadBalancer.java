@@ -31,10 +31,9 @@ public class LoadBalancer {
         return this.servers;
     }
 
-    public Optional<Server> routeRequest() {
+    public void routeRequest() {
         Optional<Server> selectedServer = this.strategy.selectServer(this.getServers().values().stream().toList());
         selectedServer.ifPresent(Server::addConnection);
-        return selectedServer;
     }
 
     public void completeRequest(Server server) {
