@@ -8,5 +8,5 @@ public interface UrlRepository {
 
     Optional<String> findShortcode(String longUrl);
     Optional<String> findLongUrl(String shortCode);
-    void save(UrlMapping urlMapping);
+    boolean saveIfAbsent(UrlMapping urlMapping);
 }

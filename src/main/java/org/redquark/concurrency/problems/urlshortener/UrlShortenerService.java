@@ -23,8 +23,12 @@ public class UrlShortenerService {
         return repository.findShortcode(longUrl)
                 .orElseGet(() -> {
                     final String shortCode = encoder.encode(counter.getAndIncrement());
-                    repository.save(new UrlMapping(longUrl, shortCode));
-                    return shortCode;
+                    final UrlMapping urlMapping = new UrlMapping(longUrl, shortCode);
+                    if (repository.saveIfAbsent(urlMapping)) {
+                        return shortCode;
+                    } else {
+                        return repository.findShortcode(longUrl).get();
+                    }
                 });
     }
 
