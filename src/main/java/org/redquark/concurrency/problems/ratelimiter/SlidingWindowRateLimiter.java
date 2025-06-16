@@ -1,9 +1,9 @@
 package org.redquark.concurrency.problems.ratelimiter;
 
-import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class SlidingWindowRateLimiter implements RateLimiter {
 
@@ -20,7 +20,7 @@ public class SlidingWindowRateLimiter implements RateLimiter {
     @Override
     public synchronized boolean isRequestAllowed(String userId) {
         final long currentTime = System.currentTimeMillis();
-        this.requestLogs.putIfAbsent(userId, new ArrayDeque<>());
+        this.requestLogs.putIfAbsent(userId, new ConcurrentLinkedDeque<>());
         final Deque<Long> timestamps = this.requestLogs.get(userId);
         while (!timestamps.isEmpty() && currentTime - timestamps.peek() >= this.windowSizeMillis) {
             timestamps.removeFirst();
