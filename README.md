@@ -9,3 +9,6 @@ Load balancer implementation based on three strategies - `Round Robin`, `Least C
 
 ### 2. Money Transfer Service
 Transfer money from one account to another account in a concurrent environment.
+
+### 3. Rate Limiter
+Rate Limiter implementation using four algorithms - `Fixed Window Counter`, `Sliding Window Counter`, `Token Bucket`, `Leaky Bucket`.
