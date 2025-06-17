@@ -11,7 +11,7 @@ public class RateLimiterService {
         this.userRateLimiters = new ConcurrentHashMap<>();
     }
 
-    public void registerUser(String userId, String algorithm, int mazRequests, int windowSizeInMillis) {
+    public void registerUser(String userId, RateLimitingAlgorithms algorithm, int mazRequests, int windowSizeInMillis) {
         userRateLimiters.put(userId, RateLimiterFactory.createRateLimiter(algorithm, mazRequests, windowSizeInMillis));
     }
 
